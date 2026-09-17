@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELAROSÈ — Beauty You Love. Safety You Deserve.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="#home"><img src="images/elarose-logo.png" alt="ELAROSÈ logo"></a>
+  <nav><a href="#story">Our Story</a><a href="#collection">Collection</a><a href="#technology">Technology</a><a href="#privacy">Privacy</a><a href="#shop">Shop</a><a href="#team">Team</a></nav>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <p class="hero-brand">ELAROSÈ</p>
+    <p class="eyebrow">WEARABLE SAFETY</p>
+    <h1>Beauty you love.<br><span>Safety you deserve.</span></h1>
+    <p class="hero-text">A fashion-first personal safety wearable ecosystem designed to make everyday protection discreet, wearable and connected.</p>
+    <div class="hero-actions"><a class="btn primary" href="#collection">Explore the collection</a><a class="btn ghost" href="#story">Discover Elarosè</a></div>
+  </div>
+  <div class="hero-card"><div class="seal">✦</div><p>DESIGNED TO BE WORN.<br>DESIGNED AROUND YOU.</p></div>
+</section>
+
+<section id="story" class="section intro">
+  <p class="eyebrow">THE IDEA</p><h2>What if safety looked like something you already love?</h2>
+  <p>Personal safety tools can ask people to choose between visibility, convenience and style. Elarosè explores a different direction: aesthetic jewelry paired with a connected safety layer.</p>
+  <div class="three-points"><div><b>01</b><h3>Discreet</h3><p>Designed to look like fashion, not emergency equipment.</p></div><div><b>02</b><h3>Connected</h3><p>Wearable + smartphone app work as one ecosystem.</p></div><div><b>03</b><h3>User-controlled</h3><p>The wearer chooses contacts, settings and activation modes.</p></div></div>
+</section>
+
+<section id="collection" class="section collection">
+  <div class="section-heading"><div><p class="eyebrow">THE COLLECTION</p><h2>Three ways to wear Elarosè.</h2></div><p>One core technology platform, expressed through different everyday accessories.</p></div>
+  <div class="product-grid">
+    <article class="product-card"><img src="images/ring.png" alt="Elarosè Smart Ring"><div class="product-info"><span>01 • FLAGSHIP PRODUCT</span><h3>Smart Ring</h3><p>Signet-style, premium and discreet, with manual activation and a compact sensor area.</p><strong>Proposed project price<br>₹5,499</strong><button onclick="addToCart('ring')">Add to cart</button></div></article>
+    <article class="product-card"><img src="images/pendant.png" alt="Elarosè Smart Pendant"><div class="product-info"><span>02 • CORE PRODUCT</span><h3>Smart Pendant</h3><p>More internal volume for battery and electronics, while keeping the form lightweight and fashion-led.</p><strong>Proposed project price<br>₹3,999</strong><button onclick="addToCart('pendant')">Add to cart</button></div></article>
+    <article class="product-card"><img src="images/bracelet.png" alt="Elarosè Smart Bracelet"><div class="product-info"><span>03 • EVERYDAY PRODUCT</span><h3>Smart Bracelet</h3><p>A larger tactile activation area for people who prefer a bracelet over a ring.</p><strong>Proposed project price<br>₹4,499</strong><button onclick="addToCart('bracelet')">Add to cart</button></div></article>
+  </div>
+</section>
+
+<section id="technology" class="section dark-section"><p class="eyebrow">THE SAFETY LAYER</p><h2>Smart technology, with the wearer in control.</h2><div class="tech-grid"><div><b>SENSE</b><p>Wearable sensors can collect signals such as heart-rate-related and skin-conductance changes.</p></div><div><b>CONNECT</b><p>Bluetooth Low Energy connects the wearable event to the paired smartphone.</p></div><div><b>INTERPRET</b><p>The app combines context and signals; a single biometric spike is not treated as proof of danger.</p></div><div><b>RESPOND</b><p>User-confirmed emergency workflows can notify chosen contacts and share location.</p></div></div><div class="confirm"><span>PRESS</span><i>→</i><span>LIGHT / VIBRATE</span><i>→</i><span>PRESS AGAIN</span><i>→</i><span>ALERT</span><p><b>Smart Confirm™</b> is designed to reduce accidental activation while keeping the user in control.</p></div></section>
+
+<section id="privacy" class="section privacy"><p class="eyebrow">TRUST</p><h2>Privacy by design.</h2><div class="privacy-grid"><div><h3>MINIMIZE</h3><p>Collect only what the feature needs.</p></div><div><h3>CONSENT</h3><p>User controls contacts, location and optional features.</p></div><div><h3>ON-DEVICE WHERE FEASIBLE</h3><p>Prefer local processing for sensitive signals where technically practical.</p></div><div><h3>CONTROL</h3><p>Clear settings for data access, sharing and deletion.</p></div></div></section>
+
+<section id="shop" class="section shop">
+  <div>
+    <p class="eyebrow">SHOP • PROJECT DEMO</p><h2>Wear what protects you.</h2>
+    <p>Choose a product and continue to Razorpay Checkout. Prices below are proposed project pricing and are charged as exact amounts at checkout.</p>
+    <div id="cart-message" class="cart-message">Your cart is empty.</div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-total" id="cart-total"></div>
+    <button class="btn primary" onclick="checkout()">Proceed to secure payment</button>
+    <p class="payment-note">Payment processing is handled by Razorpay. This project does not store card or UPI credentials.</p>
+  </div>
+  <div class="shop-note"><b>Project pricing</b><p>Smart Ring ₹5,499 • Smart Pendant ₹3,999 • Smart Bracelet ₹4,499.</p><p>Prices are proposed estimates. Final production pricing remains subject to supplier quotations, materials, electronics, testing, compliance and manufacturing costs.</p></div>
+</section>
+<section id="team" class="section team-section">
+  <div class="section-heading team-heading"><div><p class="eyebrow">OUR TEAM</p><h2>Team Elarosè.</h2></div><p>Five roles, one shared vision: building a fashion-first personal safety wearable ecosystem.</p></div>
+  <div class="team-grid">
+    <article class="team-card"><div class="member-initial">I</div><span>01 • LEADERSHIP</span><h3>Ishika</h3><strong>Founder / Team Lead</strong><p>Vision • strategy • business • pitch • final integration</p></article>
+    <article class="team-card"><div class="member-initial">T</div><span>02 • TECHNOLOGY</span><h3>Tejaswi</h3><strong>Product &amp; Technology Lead</strong><p>Sensors • BLE • app architecture • technical feasibility</p></article>
+    <article class="team-card"><div class="member-initial">G</div><span>03 • CREATIVE</span><h3>Garvi</h3><strong>Creative &amp; Brand Director</strong><p>Brand name • logo • visual identity • product aesthetics</p></article>
+    <article class="team-card"><div class="member-initial">K</div><span>04 • RESEARCH</span><h3>Khushi</h3><strong>Research &amp; Validation Lead</strong><p>Customer research • competitor research • testing • impact</p></article>
+    <article class="team-card"><div class="member-initial">Y</div><span>05 • OPERATIONS</span><h3>Yachika</h3><strong>Finance &amp; Operations Lead</strong><p>Cost model • pricing • funding roadmap • operations</p></article>
+  </div>
+</section>
+
+<section class="final"><img src="images/elarose-logo.png" alt="ELAROSÈ"><h2>Beauty you love.<br>Safety you deserve.</h2><p>We don't want safety to be something you remember only when you feel unsafe. We want it to be something you can wear every day.</p></section>
+</main>
+<footer>© 2026 ELAROSÈ • Concept / School Project</footer>
+<script src="script.js"></script>
+</body>
+</html>
