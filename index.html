@@ -77,6 +77,150 @@
 <section class="final"><img src="images/elarose-logo.svg" alt="ELAROSÈ"><h2>Beauty you love.<br>Safety you deserve.</h2><p>We don't want safety to be something you remember only when you feel unsafe. We want it to be something you can wear every day.</p></section>
 </main>
 <footer>© 2026 ELAROSÈ • Concept / School Project</footer>
+<!-- ELAROSÈ CHECKOUT -->
+<div class="checkout-overlay" id="checkout-overlay">
+
+  <div class="checkout-box">
+
+    <button class="checkout-close" onclick="closeCheckout()">×</button>
+
+    <div class="checkout-header">
+      <img src="images/elarose-logo.svg" alt="ELAROSÈ">
+      <p>SECURE CHECKOUT</p>
+      <h2>Complete your order.</h2>
+    </div>
+
+    <div class="checkout-layout">
+
+      <!-- Customer details -->
+      <div class="checkout-form-area">
+
+        <form id="checkout-form" onsubmit="submitDemoOrder(event)">
+
+          <h3>Your details</h3>
+
+          <label>
+            Full name
+            <input
+              id="checkout-name"
+              type="text"
+              placeholder="Enter your full name"
+              required
+            >
+          </label>
+
+          <label>
+            Email address
+            <input
+              id="checkout-email"
+              type="email"
+              placeholder="you@example.com"
+              required
+            >
+          </label>
+
+          <label>
+            Delivery address
+            <textarea
+              id="checkout-address"
+              placeholder="Enter your delivery address"
+              required
+            ></textarea>
+          </label>
+
+          <h3>Payment method</h3>
+
+          <div class="payment-options">
+
+            <label class="payment-option">
+              <input type="radio" name="payment" value="UPI" required>
+              <span>
+                <strong>UPI</strong>
+                <small>Pay using UPI</small>
+              </span>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="payment" value="Card">
+              <span>
+                <strong>Card</strong>
+                <small>Credit or debit card</small>
+              </span>
+            </label>
+
+            <label class="payment-option">
+              <input type="radio" name="payment" value="COD">
+              <span>
+                <strong>Cash on Delivery</strong>
+                <small>Pay when your order arrives</small>
+              </span>
+            </label>
+
+          </div>
+
+          <button class="checkout-submit" type="submit">
+            Place demo order
+          </button>
+
+          <p class="checkout-demo-note">
+            Demo checkout • No real payment is processed.
+          </p>
+
+        </form>
+
+        <!-- Success message -->
+        <div id="checkout-success" class="checkout-success">
+
+          <div class="success-mark">✓</div>
+
+          <p class="eyebrow">ORDER CONFIRMED</p>
+
+          <h2>Thank you for choosing ELAROSÈ.</h2>
+
+          <p>
+            Your demonstration order has been received successfully.
+          </p>
+
+          <p>
+            Order number:
+            <strong id="order-number"></strong>
+          </p>
+
+          <button class="checkout-submit" onclick="closeCheckout()">
+            Continue shopping
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Order summary -->
+      <aside class="checkout-summary">
+
+        <p class="eyebrow">YOUR ORDER</p>
+
+        <h3>Order summary</h3>
+
+        <div id="checkout-items"></div>
+
+        <div class="checkout-total">
+          <span>Total</span>
+          <strong id="checkout-total">₹0</strong>
+        </div>
+
+        <div class="checkout-trust">
+          <strong>ELAROSÈ</strong>
+          <p>Beauty you love. Safety you deserve.</p>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </div>
+
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
