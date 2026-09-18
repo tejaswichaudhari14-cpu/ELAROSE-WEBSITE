@@ -23,4 +23,25 @@
   display: block;
   margin: 0 auto 120px;
   object-fit: contain;
+}/* HERO LOGO */
+.hero-card {
+  width: 380px !important;
+  height: 380px !important;
+  min-height: 0 !important;
+  margin: auto !important;
+  padding: 0 !important;
+  background: #FAF4ED !important;
+  border: 1px solid #E0A6AA !important;
+  border-radius: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: none !important;
+}
+
+.hero-card img {
+  width: 88% !important;
+  height: 88% !important;
+  object-fit: contain !important;
+  display: block !important;
 }
