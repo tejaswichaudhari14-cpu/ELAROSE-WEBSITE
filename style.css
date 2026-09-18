@@ -23,7 +23,8 @@
   display: block;
   margin: 0 auto 120px;
   object-fit: contain;
-}/* HERO LOGO */
+}
+/* HERO LOGO */
 .hero-card {
   width: 380px !important;
   height: 380px !important;
