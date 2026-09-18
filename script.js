@@ -63,53 +63,61 @@ async function checkout() {
     total += PRODUCTS[id].price * quantity;
   });
 
-  const orderSummary = entries.map(([id, quantity]) => {
-    const product = PRODUCTS[id];
-    return `${product.name} × ${quantity}`;
-  }).join('\n');
+  const checkoutItems = entries.map(([id, quantity]) => ({
+    ...PRODUCTS[id],
+    quantity
+  }));
 
-  const customerName = prompt('Enter your name:');
-  if (!customerName) return;
+  openCheckout(checkoutItems, total);
+}
 
-  const email = prompt('Enter your email:');
-  if (!email) return;
+function openCheckout(items, total) {
+  const overlay = document.getElementById('checkout-overlay');
+  const itemsContainer = document.getElementById('checkout-items');
+  const totalElement = document.getElementById('checkout-total');
 
-  const address = prompt('Enter your delivery address:');
-  if (!address) return;
+  itemsContainer.innerHTML = items.map(item => `
+    <div class="checkout-product">
+      <div>
+        <strong>${item.name}</strong>
+        <small>Quantity: ${item.quantity}</small>
+      </div>
+      <strong>₹${(item.price * item.quantity).toLocaleString('en-IN')}</strong>
+    </div>
+  `).join('');
 
-  const paymentMethod = prompt(
-    'Choose a payment method:\n\n' +
-    '1 - UPI\n' +
-    '2 - Card\n' +
-    '3 - Cash on Delivery\n\n' +
-    'Enter 1, 2 or 3:'
-  );
+  totalElement.textContent = `₹${total.toLocaleString('en-IN')}`;
 
-  if (!['1', '2', '3'].includes(paymentMethod)) {
-    alert('Please choose a valid payment method.');
+  overlay.classList.add('active');
+  document.body.classList.add('checkout-open');
+}
+
+function closeCheckout() {
+  document.getElementById('checkout-overlay').classList.remove('active');
+  document.body.classList.remove('checkout-open');
+}
+
+function submitDemoOrder(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('checkout-name').value.trim();
+  const email = document.getElementById('checkout-email').value.trim();
+  const address = document.getElementById('checkout-address').value.trim();
+  const payment = document.querySelector('input[name="payment"]:checked');
+
+  if (!name || !email || !address || !payment) {
+    alert('Please complete all checkout details.');
     return;
   }
 
-  const methodNames = {
-    '1': 'UPI',
-    '2': 'Card',
-    '3': 'Cash on Delivery'
-  };
-
   const orderNumber = 'ELA' + Date.now().toString().slice(-6);
 
-  alert(
-    'ORDER CONFIRMED!\n\n' +
-    'Order: ' + orderNumber + '\n' +
-    'Customer: ' + customerName + '\n\n' +
-    orderSummary + '\n\n' +
-    'Total: ₹' + total.toLocaleString('en-IN') + '\n' +
-    'Payment: ' + methodNames[paymentMethod] + '\n\n' +
-    'Thank you for choosing ELAROSÈ.'
-  );
+  document.getElementById('checkout-form').style.display = 'none';
+  document.getElementById('checkout-success').style.display = 'block';
+
+  document.getElementById('order-number').textContent = orderNumber;
 
   Object.keys(cart).forEach(key => delete cart[key]);
-
   renderCart('Order confirmed — thank you for choosing ELAROSÈ!');
 }
 
