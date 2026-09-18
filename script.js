@@ -50,69 +50,67 @@ function renderCart(message) {
 }
 
 async function checkout() {
-  if (!Object.keys(cart).length) {
+  const entries = Object.entries(cart);
+
+  if (!entries.length) {
     alert('Your cart is empty. Add a product first.');
     return;
   }
 
-  const button = document.querySelector('#shop .primary');
-  button.disabled = true;
-  button.textContent = 'Creating order…';
+  let total = 0;
 
-  try {
-    const items = Object.entries(cart).map(([productId, quantity]) => ({ productId, quantity }));
-    const response = await fetch('/api/create-order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items })
-    });
+  entries.forEach(([id, quantity]) => {
+    total += PRODUCTS[id].price * quantity;
+  });
 
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Could not create the order.');
+  const orderSummary = entries.map(([id, quantity]) => {
+    const product = PRODUCTS[id];
+    return `${product.name} × ${quantity}`;
+  }).join('\n');
 
-    const options = {
-      key: data.keyId,
-      amount: data.amount,
-      currency: data.currency,
-      name: 'ELAROSÈ',
-      description: 'Elarosè wearable safety product',
-      order_id: data.orderId,
-      handler: async function (payment) {
-        const verifyResponse = await fetch('/api/verify-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payment)
-        });
-        const verifyData = await verifyResponse.json();
-        if (!verifyResponse.ok || !verifyData.verified) {
-          alert('Payment was received but verification could not be completed. Please contact the store administrator with your payment ID.');
-          return;
-        }
-        alert(`Payment successful!\nPayment ID: ${payment.razorpay_payment_id}`);
-        Object.keys(cart).forEach(key => delete cart[key]);
-        renderCart('Thank you — your payment was verified.');
-      },
-      prefill: {},
-      theme: { color: '#9e5f5d' },
-      modal: {
-        ondismiss: function () {
-          button.disabled = false;
-          button.textContent = 'Proceed to secure payment';
-        }
-      }
-    };
+  const customerName = prompt('Enter your name:');
+  if (!customerName) return;
 
-    const rzp = new Razorpay(options);
-    rzp.on('payment.failed', function (response) {
-      alert(`Payment failed.\n${response.error && response.error.description ? response.error.description : 'Please try again.'}`);
-    });
-    rzp.open();
-  } catch (error) {
-    alert(error.message);
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Proceed to secure payment';
+  const email = prompt('Enter your email:');
+  if (!email) return;
+
+  const address = prompt('Enter your delivery address:');
+  if (!address) return;
+
+  const paymentMethod = prompt(
+    'Choose a payment method:\n\n' +
+    '1 - UPI\n' +
+    '2 - Card\n' +
+    '3 - Cash on Delivery\n\n' +
+    'Enter 1, 2 or 3:'
+  );
+
+  if (!['1', '2', '3'].includes(paymentMethod)) {
+    alert('Please choose a valid payment method.');
+    return;
   }
+
+  const methodNames = {
+    '1': 'UPI',
+    '2': 'Card',
+    '3': 'Cash on Delivery'
+  };
+
+  const orderNumber = 'ELA' + Date.now().toString().slice(-6);
+
+  alert(
+    'ORDER CONFIRMED!\n\n' +
+    'Order: ' + orderNumber + '\n' +
+    'Customer: ' + customerName + '\n\n' +
+    orderSummary + '\n\n' +
+    'Total: ₹' + total.toLocaleString('en-IN') + '\n' +
+    'Payment: ' + methodNames[paymentMethod] + '\n\n' +
+    'Thank you for choosing ELAROSÈ.'
+  );
+
+  Object.keys(cart).forEach(key => delete cart[key]);
+
+  renderCart('Order confirmed — thank you for choosing ELAROSÈ!');
 }
 
 renderCart();
